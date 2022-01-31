@@ -1,7 +1,10 @@
+import { Button } from "antd";
 import "./App.css";
 
-function App() {
-  return <div className="App">Utils for my sister</div>;
-}
+const App = () => (
+  <div className="App">
+    <Button type="primary">antd button</Button>
+  </div>
+);
 
 export default App;
