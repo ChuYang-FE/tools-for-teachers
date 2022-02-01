@@ -1,1 +1,17 @@
 @import '~antd/dist/antd.css';
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.header .logo {
+  float: left;
+  width: 64px;
+  height: 64px;
+  background: url("./logo.svg") no-repeat center
+}
+
+.site-layout-background {
+  background: #fff;
+}
