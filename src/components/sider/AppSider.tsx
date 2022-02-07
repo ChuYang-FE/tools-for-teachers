@@ -1,10 +1,7 @@
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
 
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, LaptopOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -15,26 +12,23 @@ const AppSider = () => {
       <Menu
         mode="inline"
         defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        defaultOpenKeys={["tools"]}
         style={{ height: "100%", borderRight: 0 }}
       >
-        <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-          <Menu.Item key="1">option1</Menu.Item>
-          <Menu.Item key="2">option2</Menu.Item>
-          <Menu.Item key="3">option3</Menu.Item>
-          <Menu.Item key="4">option4</Menu.Item>
+        <SubMenu key="tools" icon={<LaptopOutlined />} title="小工具">
+          <Menu.Item key="1">
+            <Link to={"/turntable"}>转盘</Link>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to={"/dice"}>骰子</Link>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Link to={"/randomNumber"}>随机数</Link>
+          </Menu.Item>
         </SubMenu>
-        <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-          <Menu.Item key="5">option5</Menu.Item>
-          <Menu.Item key="6">option6</Menu.Item>
-          <Menu.Item key="7">option7</Menu.Item>
-          <Menu.Item key="8">option8</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-          <Menu.Item key="9">option9</Menu.Item>
-          <Menu.Item key="10">option10</Menu.Item>
-          <Menu.Item key="11">option11</Menu.Item>
-          <Menu.Item key="12">option12</Menu.Item>
+        <SubMenu key="doc" icon={<UserOutlined />} title="文件处理">
+          <Menu.Item key="4">Excel 文件</Menu.Item>
+          <Menu.Item key="5">Word 文件</Menu.Item>
         </SubMenu>
       </Menu>
     </Sider>

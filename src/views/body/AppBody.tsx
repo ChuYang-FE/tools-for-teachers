@@ -1,5 +1,8 @@
-import { Layout, Breadcrumb } from "antd";
+import { Layout } from "antd";
+import { Route, Routes } from "react-router-dom";
 import { AppSider } from "../../components";
+import Dice from "../Dice";
+import Turntable from "../Turntable";
 
 const { Content } = Layout;
 
@@ -7,12 +10,12 @@ const AppBody = () => {
   return (
     <Layout>
       <AppSider />
-      <Layout style={{ padding: "0 24px 24px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
+      <Layout style={{ padding: "24px" }}>
+        {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <Content
           className="site-layout-background"
           style={{
@@ -21,7 +24,10 @@ const AppBody = () => {
             minHeight: 280,
           }}
         >
-          Content
+          <Routes>
+            <Route path="/turntable" element={<Turntable />} />
+            <Route path="/dice" element={<Dice />} />
+          </Routes>
         </Content>
       </Layout>
     </Layout>
