@@ -2,6 +2,7 @@ import { Layout } from "antd";
 import { Route, Routes } from "react-router-dom";
 import { AppSider } from "../../components";
 import Dice from "../Dice";
+import RandomNumber from "../RandomNumber";
 import Turntable from "../Turntable";
 
 const { Content } = Layout;
@@ -22,11 +23,13 @@ const AppBody = () => {
             padding: 24,
             margin: 0,
             minHeight: 280,
+            overflow: "auto",
           }}
         >
           <Routes>
             <Route path="/turntable" element={<Turntable />} />
             <Route path="/dice" element={<Dice />} />
+            <Route path="/randomNumber" element={<RandomNumber />} />
           </Routes>
         </Content>
       </Layout>
