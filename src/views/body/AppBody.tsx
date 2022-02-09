@@ -27,6 +27,7 @@ const AppBody = () => {
           }}
         >
           <Routes>
+            <Route index element={<Turntable />} />
             <Route path="/turntable" element={<Turntable />} />
             <Route path="/dice" element={<Dice />} />
             <Route path="/randomNumber" element={<RandomNumber />} />
