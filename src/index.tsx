@@ -4,7 +4,7 @@ import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Dice, NotFound, RandomNumber, Turntable } from "./views";
+import { Dice, NotFound, RandomName, RandomNumber, Turntable } from "./views";
 
 ReactDOM.render(
   // <React.StrictMode>
@@ -15,6 +15,7 @@ ReactDOM.render(
         <Route path="turntable" element={<Turntable />} />
         <Route path="dice" element={<Dice />} />
         <Route path="randomNumber" element={<RandomNumber />} />
+        <Route path="randomName" element={<RandomName />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
