@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 
 import {
   Switch,
@@ -11,6 +11,7 @@ import {
   Badge,
   Popover,
   Empty,
+  Radio,
 } from "antd";
 import {
   QuestionCircleOutlined,
@@ -24,11 +25,17 @@ const { TextArea } = Input;
 const RandomName = () => {
   const randomNameHistoryRes = localStorage.getItem("randomNameHistoryRes");
   const randomNameNeedStorage = localStorage.getItem("randomNameNeedStorage");
+  const randomNameAllSavedList = localStorage.getItem("randomNameAllSavedList");
 
   const [popoverVisible, setPopoverVisible] = useState(false);
-
   const [namesArray, setNamesArray] = useState([]);
-  const [result, setResult] = useState(0);
+  const [listName, setListName] = useState("");
+
+  // 已保存的名单
+  const [allSavedList, setAllSavedList] = useState(
+    randomNameAllSavedList ? JSON.parse(randomNameAllSavedList) : []
+  );
+  const [result, setResult] = useState("暂无");
 
   const [needStorage, setNeedStorage] = useState(
     randomNameNeedStorage ? JSON.parse(randomNameNeedStorage) : false
@@ -41,7 +48,8 @@ const RandomName = () => {
 
   useEffect(() => {
     console.log(namesArray);
-  }, [namesArray]);
+    console.log(allSavedList);
+  }, [namesArray, allSavedList]);
 
   const handleRandom = () => {
     // the range of Math.random() is [0, 1)
@@ -71,8 +79,25 @@ const RandomName = () => {
     setNamesArray(finalRes);
   };
 
+  const inputEl = useRef<Input>(null);
+  const handleFocusInput = () => {
+    // TODO：待优化，点击获取焦点时popover还没完全弹出，导致无法获取焦点。暂时用定时器解决。
+    setTimeout(() => {
+      inputEl.current?.focus();
+    }, 200);
+  };
+
   const saveList = () => {
     setPopoverVisible(false);
+    const currentObj = {
+      title: listName,
+      value: namesArray,
+    };
+    localStorage.setItem(
+      "randomNameAllSavedList",
+      JSON.stringify([...allSavedList, currentObj])
+    );
+    setAllSavedList([...allSavedList, currentObj]);
   };
 
   const popoverVisibleChange = (visible: boolean) => {
@@ -97,6 +122,15 @@ const RandomName = () => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <Space>
                 <span>生成列表</span>
+                <span style={{ fontSize: 10 }}>选择历史列表</span>
+                <Radio.Group
+                  onChange={(e) => setNamesArray(e.target.value)}
+                  value={namesArray}
+                >
+                  {allSavedList.map((item: any) => (
+                    <Radio value={item.value}>{item.title}</Radio>
+                  ))}
+                </Radio.Group>
                 <Badge
                   count={namesArray.length || 0}
                   style={{ backgroundColor: "#52c41a" }}
@@ -109,18 +143,24 @@ const RandomName = () => {
               placement="left"
               content={
                 <Space>
-                  <Input placeholder="列表名称" />
+                  <Input
+                    placeholder="列表名称"
+                    ref={inputEl}
+                    value={listName}
+                    onChange={(e) => setListName(e.target.value)}
+                  />
                   <Button type="link" onClick={saveList}>
                     确定
                   </Button>
                 </Space>
               }
-              // title="列表名称"
               trigger="click"
               visible={popoverVisible}
               onVisibleChange={popoverVisibleChange}
             >
-              <Button type="default">保存</Button>
+              <Button type="default" onClick={handleFocusInput}>
+                保存
+              </Button>
             </Popover>
           }
         >
@@ -199,7 +239,5 @@ const RandomName = () => {
     </Space>
   );
 };
-
-
 
 export default RandomName;
