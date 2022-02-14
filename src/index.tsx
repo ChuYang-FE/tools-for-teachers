@@ -8,22 +8,18 @@ import { Dice, NotFound, RandomName, RandomNumber, Turntable } from "./views";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <>
-    <div>hello1</div>
-    <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
-      <div>hello2</div>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Turntable />} />
-          <Route path="turntable" element={<Turntable />} />
-          <Route path="dice" element={<Dice />} />
-          <Route path="randomNumber" element={<RandomNumber />} />
-          <Route path="randomName" element={<RandomName />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </>,
+  <HashRouter basename={process.env.REACT_APP_BASE_URL}>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<Turntable />} />
+        <Route path="turntable" element={<Turntable />} />
+        <Route path="dice" element={<Dice />} />
+        <Route path="randomNumber" element={<RandomNumber />} />
+        <Route path="randomName" element={<RandomName />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </HashRouter>,
   // </React.StrictMode>,
   document.getElementById("root")
 );
