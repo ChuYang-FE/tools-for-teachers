@@ -8,7 +8,7 @@ import { Dice, NotFound, RandomName, RandomNumber, Turntable } from "./views";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
+  <HashRouter basename={process.env.REACT_APP_BASE_URL}>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Turntable />} />
@@ -19,7 +19,7 @@ ReactDOM.render(
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
-  </BrowserRouter>,
+  </HashRouter>,
   // </React.StrictMode>,
   document.getElementById("root")
 );
