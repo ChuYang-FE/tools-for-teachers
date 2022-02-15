@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useRef } from "react";
 
 import {
   Switch,
@@ -12,15 +12,24 @@ import {
   Popover,
   Empty,
   Radio,
+  message,
+  Popconfirm,
 } from "antd";
+
 import {
   QuestionCircleOutlined,
   CheckOutlined,
   CloseOutlined,
   ArrowDownOutlined,
 } from "@ant-design/icons";
+import { ResultBox } from "./style";
 
 const { TextArea } = Input;
+
+interface SaveNameObj {
+  title: string;
+  value: string[];
+}
 
 const RandomName = () => {
   const randomNameHistoryRes = localStorage.getItem("randomNameHistoryRes");
@@ -28,28 +37,28 @@ const RandomName = () => {
   const randomNameAllSavedList = localStorage.getItem("randomNameAllSavedList");
 
   const [popoverVisible, setPopoverVisible] = useState(false);
-  const [namesArray, setNamesArray] = useState([]);
+  const [namesArray, setNamesArray] = useState<string[]>([]);
   const [listName, setListName] = useState("");
 
   // 已保存的名单
-  const [allSavedList, setAllSavedList] = useState(
+  const [allSavedList, setAllSavedList] = useState<SaveNameObj[]>(
     randomNameAllSavedList ? JSON.parse(randomNameAllSavedList) : []
   );
+
+  // 已选中的名单
+  const [currentSelectedObj, setCurrentSelectedObj] = useState({
+    title: "",
+    value: [],
+  });
+
   const [result, setResult] = useState("暂无");
 
-  const [needStorage, setNeedStorage] = useState(
+  const [needStorage, setNeedStorage] = useState<boolean>(
     randomNameNeedStorage ? JSON.parse(randomNameNeedStorage) : false
   );
-  const [historyResult, setHistoryResult] = useState(
-    randomNameNeedStorage && randomNameHistoryRes
-      ? JSON.parse(randomNameHistoryRes)
-      : []
+  const [historyResult, setHistoryResult] = useState<string[]>(
+    needStorage && randomNameHistoryRes ? JSON.parse(randomNameHistoryRes) : []
   );
-
-  useEffect(() => {
-    console.log(namesArray);
-    console.log(allSavedList);
-  }, [namesArray, allSavedList]);
 
   const handleRandom = () => {
     // the range of Math.random() is [0, 1)
@@ -71,12 +80,15 @@ const RandomName = () => {
     localStorage.setItem("randomNameNeedStorage", JSON.stringify(checked));
   };
 
-  const handleInputChange = (e: { target: { value: any } }) => {
+  const handleInputChange = (e: { target: { value: string } }) => {
     const finalRes = e.target.value
       .trim()
       .split("\n")
       .filter((item: any) => item !== "");
     setNamesArray(finalRes);
+
+    // to unselect radio when inputing
+    setCurrentSelectedObj({ title: "", value: [] });
   };
 
   const inputEl = useRef<Input>(null);
@@ -89,6 +101,10 @@ const RandomName = () => {
 
   const saveList = () => {
     setPopoverVisible(false);
+    if (namesArray.length === 0) {
+      message.error("列表为空！");
+      return;
+    }
     const currentObj = {
       title: listName,
       value: namesArray,
@@ -98,6 +114,21 @@ const RandomName = () => {
       JSON.stringify([...allSavedList, currentObj])
     );
     setAllSavedList([...allSavedList, currentObj]);
+    setListName("");
+    message.success(`保存 “${listName}” 成功`);
+  };
+
+  const removeSavedList = (title: string) => {
+    const restSavedList = allSavedList.filter((item) => item.title !== title);
+    console.log(restSavedList);
+    if (title === currentSelectedObj.title) {
+      setNamesArray([]);
+    }
+    setAllSavedList(restSavedList);
+    localStorage.setItem(
+      "randomNameAllSavedList",
+      JSON.stringify(restSavedList)
+    );
   };
 
   const popoverVisibleChange = (visible: boolean) => {
@@ -116,21 +147,40 @@ const RandomName = () => {
           placeholder="请输入内容，一行即一项"
         />
       </div>
+      {allSavedList.length > 0 && (
+        <Card title="已保存名单">
+          <Radio.Group
+            onChange={(e) => {
+              console.log(e.target);
+              setCurrentSelectedObj(e.target.value);
+              // e.target.value: { "title": "class 1", "value": [] }
+              setNamesArray(e.target.value.value);
+            }}
+            value={currentSelectedObj}
+            style={{ display: "flex", flexWrap: "wrap" }}
+          >
+            {allSavedList.map((item, index) => (
+              <div key={`${item.title}-${index}`} style={{ marginRight: 14 }}>
+                <Radio value={item}>{item.title}</Radio>
+                <Popconfirm
+                  title={`确定删除“${item.title}”吗？`}
+                  onConfirm={() => removeSavedList(item.title)}
+                  okText="确定"
+                  cancelText="取消"
+                >
+                  <Button type="link">删除</Button>
+                </Popconfirm>
+              </div>
+            ))}
+          </Radio.Group>
+        </Card>
+      )}
       <div>
         <Card
           title={
             <div style={{ display: "flex", alignItems: "center" }}>
               <Space>
                 <span>生成列表</span>
-                <span style={{ fontSize: 10 }}>选择历史列表</span>
-                <Radio.Group
-                  onChange={(e) => setNamesArray(e.target.value)}
-                  value={namesArray}
-                >
-                  {allSavedList.map((item: any) => (
-                    <Radio value={item.value}>{item.title}</Radio>
-                  ))}
-                </Radio.Group>
                 <Badge
                   count={namesArray.length || 0}
                   style={{ backgroundColor: "#52c41a" }}
@@ -184,21 +234,7 @@ const RandomName = () => {
           抽取
         </Button>
         <ArrowDownOutlined />
-        <div
-          style={{
-            minWidth: 180,
-            minHeight: 48,
-            padding: 2,
-            boxSizing: "border-box",
-            backgroundColor: "#aef062",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: 24,
-          }}
-        >
-          {result}
-        </div>
+        <ResultBox>{result}</ResultBox>
       </Space>
       <Card
         bodyStyle={{ maxHeight: 300, overflow: "auto" }}
@@ -227,7 +263,7 @@ const RandomName = () => {
         {historyResult.length ? (
           <Space wrap>
             {historyResult.map((item: any, index: number) => (
-              <div key={`${index}${item}`} style={{ minWidth: 120 }}>
+              <div key={`${index}-${item}`} style={{ minWidth: 120 }}>
                 第{index + 1}次：<h3>{item}</h3>
               </div>
             ))}
