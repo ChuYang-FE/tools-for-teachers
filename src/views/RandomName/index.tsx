@@ -120,7 +120,6 @@ const RandomName = () => {
 
   const removeSavedList = (title: string) => {
     const restSavedList = allSavedList.filter((item) => item.title !== title);
-    console.log(restSavedList);
     if (title === currentSelectedObj.title) {
       setNamesArray([]);
     }
@@ -151,7 +150,6 @@ const RandomName = () => {
         <Card title="已保存名单">
           <Radio.Group
             onChange={(e) => {
-              console.log(e.target);
               setCurrentSelectedObj(e.target.value);
               // e.target.value: { "title": "class 1", "value": [] }
               setNamesArray(e.target.value.value);
