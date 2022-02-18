@@ -14,16 +14,6 @@ const subMenu = [
     title: "小工具",
     menuItems: [
       {
-        key: "turntable",
-        path: "/turntable",
-        title: "转盘",
-      },
-      {
-        key: "dice",
-        path: "/dice",
-        title: "骰子",
-      },
-      {
         key: "randomNumber",
         path: "/randomNumber",
         title: "随机数",
@@ -32,6 +22,16 @@ const subMenu = [
         key: "randomName",
         path: "/randomName",
         title: "随机点名",
+      },
+      {
+        key: "turntable",
+        path: "/turntable",
+        title: "转盘",
+      },
+      {
+        key: "dice",
+        path: "/dice",
+        title: "骰子",
       },
     ],
   },
@@ -71,8 +71,10 @@ const AppSider = () => {
     <Sider width={200} className="site-layout-background">
       <Menu
         mode="inline"
-        defaultOpenKeys={keyPath}
-        defaultSelectedKeys={keyPath}
+        defaultOpenKeys={keyPath.length > 0 ? keyPath : [subMenu[0].key]}
+        defaultSelectedKeys={
+          keyPath.length > 0 ? keyPath : [subMenu[0].menuItems[0].key]
+        }
         style={{ height: "100%", borderRight: 0 }}
         onSelect={clickSubMenu}
       >

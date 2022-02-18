@@ -19,11 +19,11 @@ ReactDOM.render(
   <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index element={<Turntable />} />
-        <Route path="turntable" element={<Turntable />} />
-        <Route path="dice" element={<Dice />} />
+        <Route index element={<RandomNumber />} />
         <Route path="randomNumber" element={<RandomNumber />} />
         <Route path="randomName" element={<RandomName />} />
+        <Route path="turntable" element={<Turntable />} />
+        <Route path="dice" element={<Dice />} />
         <Route path="excel" element={<Excel />} />
         <Route path="word" element={<Word />} />
       </Route>
