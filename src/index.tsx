@@ -16,7 +16,7 @@ import {
 
 ReactDOM.render(
   // <React.StrictMode>
-  <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<RandomNumber />} />
@@ -29,7 +29,7 @@ ReactDOM.render(
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
-  </BrowserRouter>,
+  </HashRouter>,
   // </React.StrictMode>,
   document.getElementById("root")
 );
