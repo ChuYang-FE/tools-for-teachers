@@ -84,7 +84,7 @@ const RandomName = () => {
     const finalRes = e.target.value
       .trim()
       .split("\n")
-      .filter((item: any) => item !== "");
+      .filter((item: string) => item !== "");
     setNamesArray(finalRes);
 
     // to unselect radio when inputing
@@ -260,7 +260,7 @@ const RandomName = () => {
       >
         {historyResult.length ? (
           <Space wrap>
-            {historyResult.map((item: any, index: number) => (
+            {historyResult.map((item: string, index: number) => (
               <div key={`${index}-${item}`} style={{ minWidth: 120 }}>
                 第{index + 1}次：<h3>{item}</h3>
               </div>
