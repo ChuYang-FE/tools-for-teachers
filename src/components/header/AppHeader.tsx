@@ -1,16 +1,32 @@
-import { Layout, Menu } from "antd";
+import { Layout, Radio, RadioChangeEvent } from "antd";
+
+import { Locale } from "antd/lib/locale-provider";
+import enUS from "antd/lib/locale/en_US";
+import zhCN from "antd/lib/locale/zh_CN";
 
 const { Header } = Layout;
 
-const AppHeader = () => {
+type Props = {
+  changeLocale: (e: RadioChangeEvent) => void;
+  locale: Locale | undefined;
+};
+
+const AppHeader = ({ changeLocale, locale }: Props) => {
   return (
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1">抽奖</Menu.Item>
-        <Menu.Item key="2">文件处理</Menu.Item>
-        {/* <Menu.Item key="3">nav 3</Menu.Item> */}
-      </Menu>
+    <Header style={{ display: "flex", alignItems: "space-between" }}>
+      <div className="change-locale">
+        <span style={{ marginRight: 16 }}>语言: </span>
+        <Radio.Group value={locale} onChange={changeLocale}>
+          <Radio.Button key="cn" value={zhCN}>
+            中文
+          </Radio.Button>
+          <Radio.Button key="en" value={enUS}>
+            English
+          </Radio.Button>
+        </Radio.Group>
+        <div>HeaderRight</div>
+        <div>github url</div>
+      </div>
     </Header>
   );
 };

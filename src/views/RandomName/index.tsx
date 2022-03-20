@@ -163,8 +163,6 @@ const RandomName = () => {
                 <Popconfirm
                   title={`确定删除“${item.title}”吗？`}
                   onConfirm={() => removeSavedList(item.title)}
-                  okText="确定"
-                  cancelText="取消"
                 >
                   <Button type="link">删除</Button>
                 </Popconfirm>
