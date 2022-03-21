@@ -12,8 +12,10 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "antd": "^4.18.5",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.16.1",
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
@@ -30,7 +32,15 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "simple-import-sort"
+    ],
+    "rules": {
+      "no-duplicate-imports": "warn",
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn"
+    }
   },
   "browserslist": {
     "production": [

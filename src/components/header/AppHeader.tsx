@@ -1,8 +1,8 @@
 import { Layout, Radio, RadioChangeEvent } from "antd";
-
-import { Locale } from "antd/lib/locale-provider";
 import enUS from "antd/lib/locale/en_US";
 import zhCN from "antd/lib/locale/zh_CN";
+import { Locale } from "antd/lib/locale-provider";
+import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
 
@@ -12,8 +12,17 @@ type Props = {
 };
 
 const AppHeader = ({ changeLocale, locale }: Props) => {
+  const { t } = useTranslation();
+
   return (
-    <Header style={{ display: "flex", alignItems: "space-between" }}>
+    <Header
+      style={{
+        display: "flex",
+        alignItems: "space-between",
+        backgroundColor: "#fff",
+      }}
+    >
+      <h1>{t("Welcome")}</h1>
       <div className="change-locale">
         <span style={{ marginRight: 16 }}>语言: </span>
         <Radio.Group value={locale} onChange={changeLocale}>
