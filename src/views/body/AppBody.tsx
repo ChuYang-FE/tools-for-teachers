@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
+
 import { AppSider } from "../../components";
 
 const { Content } = Layout;

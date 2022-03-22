@@ -1,9 +1,9 @@
-import { Button, InputNumber, Switch, Tooltip } from "antd";
 import {
-  QuestionCircleOutlined,
   CheckOutlined,
   CloseOutlined,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
+import { Button, InputNumber, Switch, Tooltip } from "antd";
 import { useState } from "react";
 
 const RandomNumber = () => {

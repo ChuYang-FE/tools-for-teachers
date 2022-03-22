@@ -1,19 +1,19 @@
 import AppBody from "./body/AppBody";
 import Dice from "./Dice";
-import RandomNumber from "./RandomNumber";
-import RandomName from "./RandomName";
-import Turntable from "./Turntable";
-import NotFound from "./NotFound";
 import Excel from "./Excel";
+import NotFound from "./NotFound";
+import RandomName from "./RandomName";
+import RandomNumber from "./RandomNumber";
+import Turntable from "./Turntable";
 import Word from "./Word";
 
 export {
   AppBody,
-  Turntable,
   Dice,
-  RandomNumber,
-  RandomName,
-  NotFound,
   Excel,
+  NotFound,
+  RandomName,
+  RandomNumber,
+  Turntable,
   Word,
 };

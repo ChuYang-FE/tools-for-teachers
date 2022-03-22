@@ -1,27 +1,26 @@
-import { useState, useRef } from "react";
-
 import {
-  Switch,
-  Tooltip,
-  Button,
-  Input,
-  Tag,
-  Space,
-  Card,
-  Badge,
-  Popover,
-  Empty,
-  Radio,
-  message,
-  Popconfirm,
-} from "antd";
-
-import {
-  QuestionCircleOutlined,
+  ArrowDownOutlined,
   CheckOutlined,
   CloseOutlined,
-  ArrowDownOutlined,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
+import {
+  Badge,
+  Button,
+  Card,
+  Empty,
+  Input,
+  message,
+  Popconfirm,
+  Popover,
+  Radio,
+  Space,
+  Switch,
+  Tag,
+  Tooltip,
+} from "antd";
+import { useRef, useState } from "react";
+
 import { ResultBox } from "./style";
 
 const { TextArea } = Input;

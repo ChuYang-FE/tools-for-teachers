@@ -1,8 +1,7 @@
+import { LaptopOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-
-import { UserOutlined, LaptopOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
