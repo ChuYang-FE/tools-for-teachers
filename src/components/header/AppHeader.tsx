@@ -1,17 +1,20 @@
-import { Layout, Radio, RadioChangeEvent } from "antd";
-import enUS from "antd/lib/locale/en_US";
-import zhCN from "antd/lib/locale/zh_CN";
-import { Locale } from "antd/lib/locale-provider";
+import { Layout, Select } from "antd";
+import { DefaultOptionType } from "antd/lib/select";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
+const { Option } = Select;
 
 type Props = {
-  changeLocale: (e: RadioChangeEvent) => void;
-  locale: Locale | undefined;
+  changeLocale: (
+    value: string,
+    option: DefaultOptionType | DefaultOptionType[]
+  ) => void;
+  currentLang: string;
 };
 
-const AppHeader = ({ changeLocale, locale }: Props) => {
+const AppHeader = ({ changeLocale, currentLang }: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -25,14 +28,18 @@ const AppHeader = ({ changeLocale, locale }: Props) => {
       <h1>{t("Welcome")}</h1>
       <div className="change-locale">
         <span style={{ marginRight: 16 }}>语言: </span>
-        <Radio.Group value={locale} onChange={changeLocale}>
-          <Radio.Button key="cn" value={zhCN}>
-            中文
-          </Radio.Button>
-          <Radio.Button key="en" value={enUS}>
-            English
-          </Radio.Button>
-        </Radio.Group>
+        <Select
+          defaultValue="zh-cn"
+          value={currentLang}
+          style={{ width: 120 }}
+          onChange={changeLocale}
+        >
+          <Option value="zh-cn">简体中文</Option>
+          <Option value="en">English</Option>
+          <Option value="disabled" disabled>
+            繁體中文
+          </Option>
+        </Select>
         <div>HeaderRight</div>
         <div>github url</div>
       </div>
