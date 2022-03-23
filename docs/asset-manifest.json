@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/tools-for-teachers/static/css/main.04a98468.css",
-    "main.js": "/tools-for-teachers/static/js/main.e572c23d.js",
+    "main.css": "/tools-for-teachers/static/css/main.9b2f0999.css",
+    "main.js": "/tools-for-teachers/static/js/main.2ce14648.js",
     "static/js/787.70d07b40.chunk.js": "/tools-for-teachers/static/js/787.70d07b40.chunk.js",
-    "static/media/logo.svg": "/tools-for-teachers/static/media/logo.6ce24c58023cc2f8fd88.svg",
     "index.html": "/tools-for-teachers/index.html",
-    "main.04a98468.css.map": "/tools-for-teachers/static/css/main.04a98468.css.map",
-    "main.e572c23d.js.map": "/tools-for-teachers/static/js/main.e572c23d.js.map",
+    "main.9b2f0999.css.map": "/tools-for-teachers/static/css/main.9b2f0999.css.map",
+    "main.2ce14648.js.map": "/tools-for-teachers/static/js/main.2ce14648.js.map",
     "787.70d07b40.chunk.js.map": "/tools-for-teachers/static/js/787.70d07b40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.04a98468.css",
-    "static/js/main.e572c23d.js"
+    "static/css/main.9b2f0999.css",
+    "static/js/main.2ce14648.js"
   ]
 }
