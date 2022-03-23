@@ -7,12 +7,12 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      Welcome: "(English)Welcome to React",
+      Welcome: "Welcome to William's toolkit 😋",
     },
   },
   cn: {
     translation: {
-      Welcome: "（中文）欢迎来到 React",
+      Welcome: "欢迎来到 羊小羊 的工具箱 🤩",
     },
   },
 };

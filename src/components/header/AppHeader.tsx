@@ -1,6 +1,5 @@
 import { Layout, Select } from "antd";
 import { DefaultOptionType } from "antd/lib/select";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
@@ -21,13 +20,13 @@ const AppHeader = ({ changeLocale, currentLang }: Props) => {
     <Header
       style={{
         display: "flex",
-        alignItems: "space-between",
+        justifyContent: "space-between",
         backgroundColor: "#fff",
       }}
     >
       <h1>{t("Welcome")}</h1>
       <div className="change-locale">
-        <span style={{ marginRight: 16 }}>语言: </span>
+        <span style={{ marginRight: 16 }}>语言 / language :</span>
         <Select
           defaultValue="zh-cn"
           value={currentLang}
@@ -40,8 +39,6 @@ const AppHeader = ({ changeLocale, currentLang }: Props) => {
             繁體中文
           </Option>
         </Select>
-        <div>HeaderRight</div>
-        <div>github url</div>
       </div>
     </Header>
   );
