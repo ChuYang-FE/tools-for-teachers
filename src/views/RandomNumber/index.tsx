@@ -3,8 +3,9 @@ import {
   CloseOutlined,
   QuestionCircleOutlined,
 } from "@ant-design/icons";
-import { Button, InputNumber, Switch, Tooltip } from "antd";
+import { Button, InputNumber, Space, Switch, Tooltip } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const RandomNumber = () => {
   const cacheRandomNumber = localStorage.getItem("cacheRandomNumber");
@@ -19,6 +20,8 @@ const RandomNumber = () => {
   const [historyResult, setHistoryResult] = useState<number[]>(
     needStorage && cacheRandomNumber ? JSON.parse(cacheRandomNumber) : []
   );
+
+  const { t } = useTranslation();
 
   const handleRandom = () => {
     // the range of Math.random() is [0, 1), not include 1. So need to add 1
@@ -40,54 +43,47 @@ const RandomNumber = () => {
   };
 
   return (
-    <div>
-      <h2>随机数</h2>
-      <h4>随机生成指定范围内的数值：</h4>
-      <div style={{ margin: "10px 0" }}>
+    <Space direction="vertical">
+      <h2>{t("randomNum.title")}</h2>
+      <h4>{t("randomNum.desc")}</h4>
+      <Space>
         <InputNumber
           onChange={(value: number) => setMin(value)}
-          placeholder="最小值"
+          placeholder={t("randomNum.min")}
         />
-        <span> ~ </span>
+        <span>~</span>
         <InputNumber
           onChange={(value: number) => setMax(value)}
-          placeholder="最大值"
+          placeholder={t("randomNum.max")}
         />
-        <Button
-          type="primary"
-          onClick={handleRandom}
-          style={{
-            margin: "0 10px",
-          }}
-        >
-          开始生成
+        <Button type="primary" onClick={handleRandom}>
+          {t("randomNum.start")}
         </Button>
-      </div>
-      <h4>本次结果：</h4>
+      </Space>
+      <h4>{t("randomNum.result")}</h4>
       <h3>{result}</h3>
       <hr />
-      <h4>
-        历史结果：
+      <Space>
+        <h4>{t("randomNum.history")}</h4>
         <Button type="primary" danger onClick={handleClear}>
-          清空历史
+          {t("randomNum.clearHistory")}
         </Button>
-      </h4>
+      </Space>
 
-      <div style={{ margin: "10px 0" }}>
-        <span>
-          缓存
-          <Tooltip title="启用后，将缓存所有历史结果">
+      <Space>
+        <Space>
+          <span>{t("randomNum.cache")}</span>
+          <Tooltip title={t("randomNum.cacheTip")}>
             <QuestionCircleOutlined />
           </Tooltip>
-          ：
-        </span>
+        </Space>
         <Switch
           onChange={handleSwitch}
           checked={needStorage}
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}
         />
-      </div>
+      </Space>
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {historyResult.map((item, index) => (
@@ -96,7 +92,7 @@ const RandomNumber = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Space>
   );
 };
 

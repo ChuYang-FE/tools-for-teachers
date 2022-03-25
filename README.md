@@ -27,3 +27,9 @@
 ## 项目体验👇🏻
 
 在线浏览： [https://chuyang-fe.github.io/tools-for-teachers/](https://chuyang-fe.github.io/tools-for-teachers/)
+
+## ToDo Lists
+
+- i18n (包括 README.md)
+- mobile 移动端适配
+- UI enhancement

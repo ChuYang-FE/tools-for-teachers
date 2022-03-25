@@ -20,7 +20,20 @@ const cn = {
       word: "Word 文件",
     },
   },
-  body: {},
+  randomNum: {
+    title: "随机数",
+    desc: "随机生成指定范围内的数值：",
+    min: "最小值",
+    max: "最大值",
+    start: "开始生成",
+    result: "本次结果：",
+    history: "历史结果：",
+    clearHistory: "清空历史",
+    cache: "缓存",
+    cacheTip: "启用后，将缓存所有历史结果",
+
+    // ToDo: 第几次历史结果
+  },
 };
 
 export default cn;
