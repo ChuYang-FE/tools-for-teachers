@@ -30,6 +30,9 @@
 
 ## ToDo Lists
 
-- i18n (包括 README.md)
-- mobile 移动端适配
-- UI enhancement
+- [ ] 侧边栏选中问题
+- [ ] UX: 左上角新增网站图标，点击后返回首页
+- [ ] i18n (包括 README.md)
+- [ ] 404 page 设计
+- [ ] UI enhancement
+- [ ] mobile 移动端适配
