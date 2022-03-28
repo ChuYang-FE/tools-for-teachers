@@ -20,6 +20,7 @@ import {
   Tooltip,
 } from "antd";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { ResultBox } from "./style";
 
@@ -38,6 +39,7 @@ const RandomName = () => {
   const [popoverVisible, setPopoverVisible] = useState(false);
   const [namesArray, setNamesArray] = useState<string[]>([]);
   const [listName, setListName] = useState("");
+  const { t } = useTranslation();
 
   // 已保存的名单
   const [allSavedList, setAllSavedList] = useState<SaveNameObj[]>(
@@ -50,7 +52,7 @@ const RandomName = () => {
     value: [],
   });
 
-  const [result, setResult] = useState("暂无");
+  const [result, setResult] = useState(t("randomName.notAvailable") as string);
 
   const [needStorage, setNeedStorage] = useState<boolean>(
     randomNameNeedStorage ? JSON.parse(randomNameNeedStorage) : false
@@ -101,7 +103,7 @@ const RandomName = () => {
   const saveList = () => {
     setPopoverVisible(false);
     if (namesArray.length === 0) {
-      message.error("列表为空！");
+      message.error(t("randomName.notEmpty"));
       return;
     }
     const currentObj = {
@@ -135,18 +137,18 @@ const RandomName = () => {
 
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
-      <h2>随机点名</h2>
+      <h2>{t("randomName.title")}</h2>
       <div>
         <TextArea
           showCount
           maxLength={5000}
           autoSize={{ minRows: 5, maxRows: 10 }}
           onChange={handleInputChange}
-          placeholder="请输入内容，一行即一项"
+          placeholder={t("randomName.placeholder")}
         />
       </div>
       {allSavedList.length > 0 && (
-        <Card title="已保存名单">
+        <Card title={t("randomName.savedList")}>
           <Radio.Group
             onChange={(e) => {
               setCurrentSelectedObj(e.target.value);
@@ -163,7 +165,7 @@ const RandomName = () => {
                   title={`确定删除“${item.title}”吗？`}
                   onConfirm={() => removeSavedList(item.title)}
                 >
-                  <Button type="link">删除</Button>
+                  <Button type="link">{t("common.delete")}</Button>
                 </Popconfirm>
               </div>
             ))}
@@ -175,7 +177,7 @@ const RandomName = () => {
           title={
             <div style={{ display: "flex", alignItems: "center" }}>
               <Space>
-                <span>生成列表</span>
+                <span>{t("randomName.lists")}</span>
                 <Badge
                   count={namesArray.length || 0}
                   style={{ backgroundColor: "#52c41a" }}
@@ -189,13 +191,13 @@ const RandomName = () => {
               content={
                 <Space>
                   <Input
-                    placeholder="列表名称"
+                    placeholder={t("randomName.saveName")}
                     ref={inputEl}
                     value={listName}
                     onChange={(e) => setListName(e.target.value)}
                   />
                   <Button type="link" onClick={saveList}>
-                    确定
+                    {t("common.confirm")}
                   </Button>
                 </Space>
               }
@@ -204,7 +206,7 @@ const RandomName = () => {
               onVisibleChange={popoverVisibleChange}
             >
               <Button type="default" onClick={handleFocusInput}>
-                保存
+                {t("common.save")}
               </Button>
             </Popover>
           }
@@ -226,7 +228,7 @@ const RandomName = () => {
       </div>
       <Space direction="vertical" align="center" style={{ width: "100%" }}>
         <Button type="primary" onClick={handleRandom}>
-          抽取
+          {t("randomName.start")}
         </Button>
         <ArrowDownOutlined />
         <ResultBox>{result}</ResultBox>
@@ -237,11 +239,10 @@ const RandomName = () => {
         extra={
           <Space>
             <span>
-              缓存
-              <Tooltip title="启用后，将缓存所有历史结果">
+              <span>{t("common.cache")}</span>
+              <Tooltip title={t("common.cacheTip")}>
                 <QuestionCircleOutlined />
               </Tooltip>
-              ：
             </span>
             <Switch
               onChange={handleSwitch}
@@ -250,7 +251,7 @@ const RandomName = () => {
               unCheckedChildren={<CloseOutlined />}
             />
             <Button type="primary" danger onClick={handleClear}>
-              清空历史
+              {t("common.clearHistory")}
             </Button>
           </Space>
         }
