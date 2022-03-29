@@ -9,7 +9,7 @@ const AppBody = () => {
   return (
     <Layout>
       <AppSider />
-      <Layout style={{ padding: "24px" }}>
+      <Layout style={{ padding: "0.5%" }}>
         {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
@@ -18,7 +18,7 @@ const AppBody = () => {
         <Content
           className="site-layout-background"
           style={{
-            padding: 24,
+            padding: "2.5%",
             margin: 0,
             minHeight: 280,
             overflow: "auto",

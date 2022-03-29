@@ -2,7 +2,7 @@ import { LaptopOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -59,23 +59,29 @@ const AppSider = () => {
   const cachekeyPath = JSON.parse(keyPathString);
   const [keyPath, setKeyPath] = useState<string[]>(cachekeyPath);
   const { t } = useTranslation();
+  let location = useLocation();
+
+  useEffect(() => {
+    setKeyPath([location.pathname.slice(1)]); // slice /randomNumber to randomNumber
+  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem("currentMenu", JSON.stringify(keyPath));
   }, [keyPath]);
 
   const clickSubMenu = (e: { keyPath: string[] }) => {
-    setKeyPath(e.keyPath);
+    setKeyPath([e.keyPath[0]]);
   };
 
   return (
-    <Sider width={200} className="site-layout-background">
+    <Sider breakpoint="md" className="site-layout-background">
       <Menu
         mode="inline"
-        defaultOpenKeys={keyPath.length > 0 ? keyPath : [subMenu[0].key]}
+        defaultOpenKeys={["tools", "docs"]}
         defaultSelectedKeys={
           keyPath.length > 0 ? keyPath : [subMenu[0].menuItems[0].key]
         }
+        selectedKeys={keyPath}
         style={{ height: "100%", borderRight: 0 }}
         onSelect={clickSubMenu}
       >
