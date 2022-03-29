@@ -9,7 +9,7 @@ const cn = {
     delete: "删除",
   },
   header: {
-    welcome: "欢迎来到 羊小羊 的工具箱 🤩",
+    welcome: "羊小羊的工具箱🤩",
   },
   sidebar: {
     title: {

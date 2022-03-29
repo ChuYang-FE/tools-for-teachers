@@ -9,7 +9,7 @@ const en = {
     delete: "Delete",
   },
   header: {
-    welcome: "Welcome to William's toolkit 😋",
+    welcome: "William's toolkit😋",
   },
   sidebar: {
     title: {

@@ -235,15 +235,15 @@ const RandomName = () => {
       </Space>
       <Card
         bodyStyle={{ maxHeight: 300, overflow: "auto" }}
-        title="历史结果"
+        title={t("randomName.history")}
         extra={
           <Space>
-            <span>
+            <Space>
               <span>{t("common.cache")}</span>
               <Tooltip title={t("common.cacheTip")}>
                 <QuestionCircleOutlined />
               </Tooltip>
-            </span>
+            </Space>
             <Switch
               onChange={handleSwitch}
               checked={needStorage}
