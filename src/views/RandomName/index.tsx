@@ -22,7 +22,7 @@ import {
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ResultBox } from "./style";
+import { HoverButton, ResultBox } from "./style";
 
 const { TextArea } = Input;
 
@@ -227,9 +227,19 @@ const RandomName = () => {
         </Card>
       </div>
       <Space direction="vertical" align="center" style={{ width: "100%" }}>
-        <Button type="primary" onClick={handleRandom}>
-          {t("randomName.start")}
-        </Button>
+        {namesArray.length === 0 ? (
+          <HoverButton
+            type="primary"
+            title={t("randomName.notEmpty")}
+            disabled={true}
+          >
+            {t("randomName.start")}
+          </HoverButton>
+        ) : (
+          <Button type="primary" onClick={handleRandom}>
+            {t("randomName.start")}
+          </Button>
+        )}
         <ArrowDownOutlined />
         <ResultBox>{result}</ResultBox>
       </Space>
