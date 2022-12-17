@@ -15,17 +15,17 @@ const ResultBox = styled.div`
 
 const HoverButton = styled(Button)`
   :hover:after {
-		position: absolute;
-		left: 50px;
-		top: -40px;
-		padding: 5px;
-		background-color: #0095ff;
-		border-radius: 5px;
-		color: #fff;
-		content: attr(title);
-		z-index: 2;
-		width: 120px;
-	}
+    position: absolute;
+    left: 50px;
+    top: -40px;
+    padding: 5px;
+    background-color: #0095ff;
+    border-radius: 5px;
+    color: #fff;
+    content: attr(title);
+    z-index: 2;
+    width: 120px;
+  }
 `;
 
-export { HoverButton,ResultBox };
+export { HoverButton, ResultBox };
