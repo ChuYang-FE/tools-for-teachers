@@ -14,7 +14,7 @@ const ResultBox = styled.div`
 `;
 
 const HoverButton = styled(Button)`
-  :hover:after {
+  :hover::after {
     position: absolute;
     left: 50px;
     top: -40px;
